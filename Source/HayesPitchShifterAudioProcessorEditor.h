@@ -3,12 +3,13 @@
 #include "HayesPitchShifterAudioProcessor.h"
 #include "CustomLookAndFeel.h"
 #include "PitchSlider.h"
+#include "PresetBar.h"
 
 class HayesPitchShifterAudioProcessorEditor  : public juce::AudioProcessorEditor
                                              , public juce::TextButton::Listener
 {
 public:
-    HayesPitchShifterAudioProcessorEditor (HayesPitchShifterAudioProcessor* procesor);
+    HayesPitchShifterAudioProcessorEditor (HayesPitchShifterAudioProcessor& procesor);
     ~HayesPitchShifterAudioProcessorEditor();
 
     void paint (juce::Graphics&) override;
@@ -17,10 +18,13 @@ public:
 
 private:
     HayesPitchShifterAudioProcessor* processor;
-	PitchSlider pitchSlider;
+    
+    PitchSlider pitchSlider;
     juce::Label pitchLabel;
     juce::TextButton pitchModeButton;
     
+    PresetBar presetBar;
+
     juce::Image image;
 	
 	CustomLookAndFeel customLookAndFeel;

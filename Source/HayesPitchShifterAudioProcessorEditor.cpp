@@ -1,11 +1,12 @@
 #include "HayesPitchShifterAudioProcessor.h"
 #include "HayesPitchShifterAudioProcessorEditor.h"
 
-HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor (HayesPitchShifterAudioProcessor* p)
-:	AudioProcessorEditor (*p)
-,   processor (p)
-,   pitchAttachment { p->apvts, "pitch", pitchSlider }
-,   buttonAttachment { p->apvts, "discrete", pitchModeButton }
+HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor (HayesPitchShifterAudioProcessor& p)
+:   AudioProcessorEditor { &p }
+,   processor            { &p }
+,   presetBar            { p }
+,   pitchAttachment      { p.apvts, "pitch",    pitchSlider }
+,   buttonAttachment     { p.apvts, "discrete", pitchModeButton }
 {
 	pitchLabel.setLookAndFeel(&customLookAndFeel);
 	pitchLabel.setFont(customLookAndFeel.getCommonMenuFont(1.0));
@@ -22,6 +23,9 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor (Ha
 	pitchModeButton.setToggleable(true);
 	pitchModeButton.addListener(this);
 	addAndMakeVisible(pitchModeButton);
+
+	presetBar.setLookAndFeel(&customLookAndFeel);
+	addAndMakeVisible(presetBar);
 	
     image = juce::ImageCache::getFromMemory(BinaryData::bg_file_jpg, BinaryData::bg_file_jpgSize);
 	setSize (200, 150);
@@ -39,9 +43,10 @@ void HayesPitchShifterAudioProcessorEditor::paint (juce::Graphics& g)
 
 void HayesPitchShifterAudioProcessorEditor::resized()
 {
-	pitchLabel.setBounds(75, 5, 100, 30);
-	pitchSlider.setBounds(55, 35, 80, 80);
-	pitchModeButton.setBounds(55, 120, 80, 20);
+	presetBar.setBounds(0, 0, 200, 20);
+	pitchLabel.setBounds(75, 20, 100, 30);
+	pitchSlider.setBounds(55, 40, 80, 80);
+	pitchModeButton.setBounds(55, 125, 80, 20);
 }
 
 void HayesPitchShifterAudioProcessorEditor::buttonClicked(juce::Button* button)

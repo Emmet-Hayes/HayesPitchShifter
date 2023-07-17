@@ -47,7 +47,7 @@ void HayesPitchShifterAudioProcessor::processBlock(juce::AudioSampleBuffer& buff
 
 juce::AudioProcessorEditor* HayesPitchShifterAudioProcessor::createEditor()
 {
-    return new HayesPitchShifterAudioProcessorEditor(this);
+    return new HayesPitchShifterAudioProcessorEditor(*this);
 }
 
 void HayesPitchShifterAudioProcessor::getStateInformation(juce::MemoryBlock& destData)

@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="UmnGjo" name="HayesPitchShifter" projectType="audioplug"
               useAppConfig="0" addUsingNamespaceToJuceHeader="0" displaySplashScreen="1"
-              jucerFormatVersion="1" companyName="EmmetSoft" pluginFormats="buildAU,buildLV2,buildStandalone,buildVST3">
+              jucerFormatVersion="1" companyName="EmmetSoft" pluginFormats="buildAU,buildLV2,buildStandalone,buildVST3"
+              defines="JUCE_MODAL_LOOPS_PERMITTED=1">
   <MAINGROUP id="ggGipP" name="HayesPitchShifter">
     <GROUP id="{B7167CF1-436F-E255-56F4-7CB477118FF2}" name="Source">
       <GROUP id="{BD02CBA5-9BD3-BFE4-0422-1855A7AB037F}" name="DSP">
@@ -26,6 +27,12 @@
       <FILE id="KJGnog" name="HayesPitchShifterAudioProcessorEditor.h" compile="0"
             resource="0" file="Source/HayesPitchShifterAudioProcessorEditor.h"/>
       <FILE id="QmtDmX" name="PitchSlider.h" compile="0" resource="0" file="Source/PitchSlider.h"/>
+      <FILE id="D71mp0" name="PresetBar.cpp" compile="1" resource="0" file="Source/PresetBar.cpp"/>
+      <FILE id="FE97wD" name="PresetBar.h" compile="0" resource="0" file="Source/PresetBar.h"/>
+      <FILE id="BnKSvQ" name="PresetComboBox.cpp" compile="1" resource="0"
+            file="Source/PresetComboBox.cpp"/>
+      <FILE id="CRzmUp" name="PresetComboBox.h" compile="0" resource="0"
+            file="Source/PresetComboBox.h"/>
     </GROUP>
     <FILE id="sHDiz2" name="bg_file.jpg" compile="0" resource="1" file="Images/bg_file.jpg"/>
   </MAINGROUP>
