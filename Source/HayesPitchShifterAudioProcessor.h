@@ -32,8 +32,11 @@ public:
     juce::AudioProcessorValueTreeState apvts;
 
 private:
+    float calculateDiscretePitchRatio();
+
 	PitchShifter pitchShifter;
 	std::atomic<float>* pitchParam = nullptr;
+	std::atomic<float>* discreteParam = nullptr;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HayesPitchShifterAudioProcessor)
 };

@@ -14,7 +14,12 @@ public:
 	void drawPopupMenuBackground(juce::Graphics&, int, int) override;
 	inline void setScale(const float s) { scale = s; }
 	juce::Font getCommonMenuFont(float);
+    void drawButtonBackground(juce::Graphics& g, juce::Button& button, const juce::Colour& backgroundColour,
+                               bool isMouseOverButton, bool isButtonDown);
 
+    void drawButtonText(juce::Graphics& g, juce::TextButton& button, 
+                        bool /*isMouseOverButton*/, bool /*isButtonDown*/);
+	juce::Font getTextButtonFont(juce::TextButton&, int buttonHeight);
 private:
 	float scale = 1.0f;
 	float rotaryOutlineBrightness = 1.0f;

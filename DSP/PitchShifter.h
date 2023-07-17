@@ -59,7 +59,7 @@ public:
 					x / (float)phaseVocoder.getWindowSize();
 
 				const auto deltaPhase = omega + PhaseVocoder::principalArgument(
-					phase - previousFramePhases[x] - omega ); // Apply LFO accumulated value
+					phase - previousFramePhases[x] - omega); 
 
 				previousFramePhases[x] = phase;
 				synthPhaseIncrements[x] = PhaseVocoder::principalArgument(synthPhaseIncrements[x] +
