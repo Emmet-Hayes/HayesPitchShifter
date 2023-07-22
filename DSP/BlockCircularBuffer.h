@@ -120,7 +120,7 @@ struct BlockCircularBuffer final
 
     // The first 'overlapAmount' of 'sourceBuffer' samples are added to the existing buffer
     // The remainder of samples are set in the buffer (overwrite)
-    void overlapWrite (ElementType* const sourceBuffer, const long sourceLength)
+    void overlapWrite (const ElementType* sourceBuffer, const long sourceLength)
     {
 		// Since we're using a circular buffer, we have to be careful when to add samples to the existing
 		// data and when to overwrite out of date samples. This number can change when modulating between
@@ -128,15 +128,15 @@ struct BlockCircularBuffer final
 		// index we need to "add" to and at which point we need to "set" the samples to overwrite the history
 		const int writeIndexDifference = getDifferenceBetweenIndexes(writeIndex, latestDataIndex, length);
 		const int overlapSampleCount = sourceLength - writeHopSize;
-		const auto overlapAmount = std::min(writeIndexDifference, overlapSampleCount);
+		const int overlapAmount = std::min(writeIndexDifference, overlapSampleCount);
 		
-		auto tempWriteIndex = writeIndex;
-		auto firstWriteAmount = writeIndex + overlapAmount > length ?
+		int tempWriteIndex = writeIndex;
+		int firstWriteAmount = writeIndex + overlapAmount > length ?
 			length - writeIndex : overlapAmount;
 
 		auto internalBuffer = block.getData();
 
-		juce::FloatVectorOperations::add (internalBuffer + writeIndex, sourceBuffer, firstWriteAmount);
+		juce::FloatVectorOperations::add(internalBuffer + writeIndex, sourceBuffer, firstWriteAmount);
 
 		if (firstWriteAmount < overlapAmount)
 		{
@@ -179,8 +179,6 @@ private:
 	long latestDataIndex = 0;
     int writeHopSize = 0;
     int readHopSize = 0;
-
-#ifdef DEBUG
 	const char* name = "";
-#endif
+  
 };

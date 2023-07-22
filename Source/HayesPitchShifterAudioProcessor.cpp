@@ -2,13 +2,9 @@
 #include "HayesPitchShifterAudioProcessorEditor.h"
 
 HayesPitchShifterAudioProcessor::HayesPitchShifterAudioProcessor() 
-:   apvts { *this, nullptr, "Params", {
-            std::make_unique<juce::AudioParameterFloat>("pitch", "Pitch Multiplier",
-                juce::NormalisableRange<float>(0.5f, 2.f), 1.0f),
-            std::make_unique<juce::AudioParameterBool>("discrete", "Discrete Pitch", false)
-          } }
+:   BaseAudioProcessor { createParameterLayout() }
 {
-    const auto window = pitchShifter.getLatencyInSamples();
+    const auto window = pitchShifterL.getLatencyInSamples() + pitchShifterR.getLatencyInSamples();
     pitchParam = apvts.getRawParameterValue("pitch");
     discreteParam = apvts.getRawParameterValue("discrete");
     setLatencySamples(window);
@@ -35,32 +31,37 @@ void HayesPitchShifterAudioProcessor::processBlock(juce::AudioSampleBuffer& buff
     if (discreteParam->load() > 0.5f)
     {
         float discretePitchRatio = calculateDiscretePitchRatio();
-        pitchShifter.setPitchRatio(discretePitchRatio);
+        pitchShifterL.setPitchRatio(discretePitchRatio);
+        pitchShifterR.setPitchRatio(discretePitchRatio);
     }
     else
-        pitchShifter.setPitchRatio(pitchParam->load());
-        
-    pitchShifter.process(buffer.getWritePointer(0), numSamples); // Process the block with the PitchShifter
-    buffer.copyFrom(1, 0, buffer.getWritePointer(0), numSamples);
-}
+    {
+        float pitchRatio = pitchParam->load();
+        pitchShifterL.setPitchRatio(pitchRatio);
+        pitchShifterR.setPitchRatio(pitchRatio);
+    }
 
+  for (auto i = 0; i < totalNumOutputChannels; ++i)
+  {
+      if (i == 0)
+          pitchShifterL.process(buffer.getWritePointer(i), numSamples);
+      else
+          pitchShifterR.process(buffer.getWritePointer(i), numSamples);
+  }
+}
 
 juce::AudioProcessorEditor* HayesPitchShifterAudioProcessor::createEditor()
 {
     return new HayesPitchShifterAudioProcessorEditor(*this);
 }
 
-void HayesPitchShifterAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
+juce::AudioProcessorValueTreeState::ParameterLayout HayesPitchShifterAudioProcessor::createParameterLayout()
 {
-    if (auto xml = apvts.state.createXml())
-        copyXmlToBinary(*xml, destData);
-}
-
-void HayesPitchShifterAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
-{
-    if (auto xml = getXmlFromBinary(data, sizeInBytes))
-        if (xml->hasTagName(apvts.state.getType()))
-            apvts.state = juce::ValueTree::fromXml(*xml);
+    juce::AudioProcessorValueTreeState::ParameterLayout layout;
+    layout.add(std::make_unique<juce::AudioParameterFloat>("pitch", "Pitch Multiplier",
+                                                           juce::NormalisableRange<float>(0.5f, 2.f), 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterBool>("discrete", "Discrete Pitch", false));
+  return layout;
 }
 
 float HayesPitchShifterAudioProcessor::calculateDiscretePitchRatio()
