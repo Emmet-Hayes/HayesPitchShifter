@@ -119,7 +119,6 @@ float HayesPitchShifterAudioProcessor::calculateDiscretePitchRatio()
 }
 
 
-
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new HayesPitchShifterAudioProcessor();

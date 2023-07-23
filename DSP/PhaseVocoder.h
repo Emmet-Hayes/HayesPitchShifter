@@ -25,12 +25,12 @@ public:
 public:
     PhaseVocoder (int windowLength = 2048, int fftSize = 2048, Windows windowType = Windows::hann)
     :   fft(std::make_unique<juce::dsp::FFT>(nearestPower2(fftSize)))
-    ,   samplesTilNextProcess (windowLength)
     ,   analysisBuffer (windowLength)
     ,   synthesisBuffer (windowLength * 3)
     ,   spectralBufferSize (windowLength * 2)
+    ,   samplesTilNextProcess (windowLength)
+    ,   windowFunction (windowLength)
     ,   windowSize (windowLength)
-    ,   windowFunction(windowLength)
     ,   resampleBufferSize (windowLength)
     {
         windowOverlaps = getOverlapsRequiredForWindowType(windowType);
@@ -129,7 +129,7 @@ public:
         {
             const auto remainingIncomingSamples = (audioBufferSize - internalOffset);
             internalBufferSize = incomingSampleCount + remainingIncomingSamples >= samplesTilNextProcess ?
-                                 samplesTilNextProcess - incomingSampleCount : remainingIncomingSamples;
+                                 samplesTilNextProcess - static_cast<int>(incomingSampleCount) : remainingIncomingSamples;
 
             jassert (internalBufferSize <= audioBufferSize);
 

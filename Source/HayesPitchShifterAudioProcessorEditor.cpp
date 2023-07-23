@@ -3,11 +3,14 @@
 
 HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor (HayesPitchShifterAudioProcessor& p)
 :   BaseAudioProcessorEditor { p }
-,   processor            { p }
-,   presetBar            { p }
-,   pitchAttachment      { p.apvts, "pitch",    pitchSlider }
-,   buttonAttachment     { p.apvts, "discrete", pitchModeButton }
+,   processor              { p }
+,   presetBar              { p }
+,   pitchAttachment         { p.apvts, "pitch",    pitchSlider }
+,   buttonAttachment        { p.apvts, "discrete", pitchModeButton }
 {
+    presetBar.setLookAndFeel(&customLookAndFeel);
+    addAndMakeVisible(presetBar);
+
     pitchLabel.setLookAndFeel(&customLookAndFeel);
     pitchLabel.setFont(customLookAndFeel.getPopupMenuFont());
     pitchLabel.setText("Pitch", juce::NotificationType::dontSendNotification);
@@ -23,9 +26,6 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor (Ha
     pitchModeButton.setToggleable(true);
     pitchModeButton.addListener(this);
     addAndMakeVisible(pitchModeButton);
-
-    presetBar.setLookAndFeel(&customLookAndFeel);
-    addAndMakeVisible(presetBar);
 
     image = juce::ImageCache::getFromMemory(BinaryData::bg_file_jpg, BinaryData::bg_file_jpgSize);
     setSize (200, 150);

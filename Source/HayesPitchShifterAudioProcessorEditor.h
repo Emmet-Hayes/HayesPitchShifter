@@ -18,16 +18,15 @@ public:
 
 private:
     HayesPitchShifterAudioProcessor& processor;
-    
+
+    juce::Image image;
+    CustomLookAndFeel customLookAndFeel;
+
+    PresetBar presetBar;
+
     PitchSlider pitchSlider;
     juce::Label pitchLabel;
     juce::TextButton pitchModeButton;
-    
-    PresetBar presetBar;
-
-    juce::Image image;
-
-    CustomLookAndFeel customLookAndFeel;
 
     juce::AudioProcessorValueTreeState::SliderAttachment pitchAttachment;
     juce::AudioProcessorValueTreeState::ButtonAttachment buttonAttachment;

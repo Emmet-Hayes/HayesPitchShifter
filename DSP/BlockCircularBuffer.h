@@ -127,12 +127,12 @@ struct BlockCircularBuffer final
 		// the pitch (which alters the size of the overlaps). The calculation below will determine the
 		// index we need to "add" to and at which point we need to "set" the samples to overwrite the history
 		const int writeIndexDifference = getDifferenceBetweenIndexes(writeIndex, latestDataIndex, length);
-		const int overlapSampleCount = sourceLength - writeHopSize;
+		const int overlapSampleCount = static_cast<int>(sourceLength) - writeHopSize;
 		const int overlapAmount = std::min(writeIndexDifference, overlapSampleCount);
 		
-		int tempWriteIndex = writeIndex;
+		int tempWriteIndex = static_cast<int>(writeIndex);
 		int firstWriteAmount = writeIndex + overlapAmount > length ?
-			length - writeIndex : overlapAmount;
+			static_cast<int>(length) - static_cast<int>(writeIndex) : overlapAmount;
 
 		auto internalBuffer = block.getData();
 
@@ -148,8 +148,8 @@ struct BlockCircularBuffer final
 		tempWriteIndex %= length;
 
 		const auto remainingElements = sourceLength - overlapAmount;
-		firstWriteAmount = tempWriteIndex + remainingElements > length ?
-			length - tempWriteIndex : remainingElements;
+		firstWriteAmount = tempWriteIndex + remainingElements > static_cast<int>(length) ?
+			static_cast<int>(length) - tempWriteIndex : static_cast<int>(remainingElements);
 
 		memcpy (internalBuffer + tempWriteIndex, sourceBuffer + overlapAmount, sizeof (ElementType) *
 			firstWriteAmount);
@@ -166,7 +166,7 @@ struct BlockCircularBuffer final
     }
 
 private:
-	int getDifferenceBetweenIndexes(int index1, int index2, int bufferLength) 
+	long getDifferenceBetweenIndexes(long index1, long index2, long bufferLength)
 	{
 		return (index1 <= index2) ? index2 - index1 : bufferLength - index1 + index2;
 	}
