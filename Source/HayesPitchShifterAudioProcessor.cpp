@@ -20,11 +20,9 @@ void HayesPitchShifterAudioProcessor::processBlock(juce::AudioSampleBuffer& buff
     const auto totalNumInputChannels = getTotalNumInputChannels();
     const auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-    // Need 2 input and output channels at least, further channels will be ignored
     jassert(totalNumInputChannels >= 2);
     jassert(totalNumOutputChannels >= 2);
 
-    // Clear unused output channels
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear(i, 0, numSamples);
 
@@ -61,7 +59,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout HayesPitchShifterAudioProces
     layout.add(std::make_unique<juce::AudioParameterFloat>("pitch", "Pitch Multiplier",
                                                            juce::NormalisableRange<float>(0.5f, 2.f), 1.0f));
     layout.add(std::make_unique<juce::AudioParameterBool>("discrete", "Discrete Pitch", false));
-  return layout;
+    return layout;
 }
 
 float HayesPitchShifterAudioProcessor::calculateDiscretePitchRatio()

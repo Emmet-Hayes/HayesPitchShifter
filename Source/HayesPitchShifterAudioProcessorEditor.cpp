@@ -5,8 +5,6 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor (Ha
 :   BaseAudioProcessorEditor { p }
 ,   processor              { p }
 ,   presetBar              { p }
-,   pitchAttachment         { p.apvts, "pitch",    pitchSlider }
-,   buttonAttachment        { p.apvts, "discrete", pitchModeButton }
 {
     presetBar.setLookAndFeel(&customLookAndFeel);
     addAndMakeVisible(presetBar);
@@ -28,6 +26,10 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor (Ha
     addAndMakeVisible(pitchModeButton);
 
     image = juce::ImageCache::getFromMemory(BinaryData::bg_file_jpg, BinaryData::bg_file_jpgSize);
+    
+    pitchAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment> (p.apvts, "pitch", pitchSlider);
+    buttonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(p.apvts, "discrete", pitchModeButton);
+
     setSize (200, 150);
 }
 

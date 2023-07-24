@@ -2,9 +2,9 @@
 #include <JuceHeader.h>
 #include <atomic>
 
-#include "../DSP/PhaseVocoder.h"
-#include "../DSP/PitchShifter.h"
-#include "../DSP/PeakShifter.h"
+#include "DSP/PhaseVocoder.h"
+#include "DSP/PitchShifter.h"
+#include "DSP/PeakShifter.h"
 #include "../../Common/BaseAudioProcessor.h"
 
 class HayesPitchShifterAudioProcessor  : public BaseAudioProcessor

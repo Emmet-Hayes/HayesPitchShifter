@@ -28,7 +28,7 @@ private:
     juce::Label pitchLabel;
     juce::TextButton pitchModeButton;
 
-    juce::AudioProcessorValueTreeState::SliderAttachment pitchAttachment;
-    juce::AudioProcessorValueTreeState::ButtonAttachment buttonAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> pitchAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachment;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HayesPitchShifterAudioProcessorEditor)
 };

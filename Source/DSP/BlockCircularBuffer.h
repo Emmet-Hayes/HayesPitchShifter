@@ -126,7 +126,7 @@ struct BlockCircularBuffer final
 		// data and when to overwrite out of date samples. This number can change when modulating between
 		// the pitch (which alters the size of the overlaps). The calculation below will determine the
 		// index we need to "add" to and at which point we need to "set" the samples to overwrite the history
-		const int writeIndexDifference = getDifferenceBetweenIndexes(writeIndex, latestDataIndex, length);
+		const int writeIndexDifference = static_cast<int>(getDifferenceBetweenIndexes(writeIndex, latestDataIndex, length));
 		const int overlapSampleCount = static_cast<int>(sourceLength) - writeHopSize;
 		const int overlapAmount = std::min(writeIndexDifference, overlapSampleCount);
 		
