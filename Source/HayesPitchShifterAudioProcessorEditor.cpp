@@ -40,7 +40,7 @@ HayesPitchShifterAudioProcessorEditor::~HayesPitchShifterAudioProcessorEditor()
 
 void HayesPitchShifterAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.drawImage(image, 0, 0, 200, 150, 250, 150, 400, 300);
+    g.drawImage(image, 0, 0, 200, 150, 0, 0, 800, 600);
 }
 
 void HayesPitchShifterAudioProcessorEditor::resized()

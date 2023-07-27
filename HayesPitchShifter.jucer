@@ -7,7 +7,7 @@
   <MAINGROUP id="ggGipP" name="HayesPitchShifter">
     <GROUP id="{D70375F0-B55A-473A-AD9B-2C70A6A3BE1D}" name="Resources">
       <GROUP id="{03A1AE22-9E81-7835-BDFD-B30AA759D93A}" name="Images">
-        <FILE id="CNhQ4h" name="bg_file.jpg" compile="0" resource="1" file="Resources/Images/bg_file.jpg"/>
+        <FILE id="nlHTwY" name="bg_file.jpg" compile="0" resource="1" file="Resources/Images/bg_file.jpg"/>
       </GROUP>
     </GROUP>
     <GROUP id="{CF8BFBAD-E51C-A963-DB0D-CF2B4428456F}" name="Common">
