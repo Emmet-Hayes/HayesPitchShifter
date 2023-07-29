@@ -22,6 +22,7 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor (Ha
     pitchModeButton.setLookAndFeel(&customLookAndFeel);
     pitchModeButton.setButtonText("Intervals");
     pitchModeButton.setToggleable(true);
+    pitchModeButton.setToggleState(true, juce::dontSendNotification);
     pitchModeButton.addListener(this);
     addAndMakeVisible(pitchModeButton);
 
@@ -46,8 +47,8 @@ void HayesPitchShifterAudioProcessorEditor::paint (juce::Graphics& g)
 void HayesPitchShifterAudioProcessorEditor::resized()
 {
     presetBar.setBounds(0, 0, 200, 20);
-    pitchLabel.setBounds(75, 20, 100, 30);
-    pitchSlider.setBounds(55, 40, 80, 80);
+    pitchLabel.setBounds(77, 20, 100, 30);
+    pitchSlider.setBounds(57, 40, 80, 80);
     pitchModeButton.setBounds(55, 125, 80, 20);
 }
 
@@ -55,7 +56,7 @@ void HayesPitchShifterAudioProcessorEditor::buttonClicked(juce::Button* button)
 {
     if (button == &pitchModeButton)
     {
-        pitchModeButton.setToggleState(!pitchModeButton.getToggleState(), juce::dontSendNotification);
         pitchSlider.changePitchMode();
+        pitchModeButton.setToggleState(!pitchModeButton.getToggleState(), juce::dontSendNotification);
     }
 }
