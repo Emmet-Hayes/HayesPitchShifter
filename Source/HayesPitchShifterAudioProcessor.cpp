@@ -10,11 +10,11 @@ HayesPitchShifterAudioProcessor::HayesPitchShifterAudioProcessor()
     setLatencySamples(window);
 }
 
-void HayesPitchShifterAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
+void HayesPitchShifterAudioProcessor::prepareToPlay(double /*sampleRate*/, int /*samplesPerBlock*/)
 { 
 }
 
-void HayesPitchShifterAudioProcessor::processBlock(juce::AudioSampleBuffer& buffer, juce::MidiBuffer& midiMessages)
+void HayesPitchShifterAudioProcessor::processBlock(juce::AudioSampleBuffer& buffer, juce::MidiBuffer& /*midiMessages*/)
 {
     const auto numSamples = buffer.getNumSamples();
     const auto totalNumInputChannels = getTotalNumInputChannels();

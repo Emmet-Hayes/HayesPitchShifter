@@ -1,9 +1,10 @@
 #pragma once
-#include "HayesPitchShifterAudioProcessor.h"
 #include "../../Common/BaseAudioProcessorEditor.h"
 #include "../../Common/CustomLookAndFeel.h"
 #include "../../Common/PitchSlider.h"
 #include "../../Common/PresetBar.h"
+#include "HayesPitchShifterAudioProcessor.h"
+
 
 class HayesPitchShifterAudioProcessorEditor  : public BaseAudioProcessorEditor
                                             , public juce::TextButton::Listener

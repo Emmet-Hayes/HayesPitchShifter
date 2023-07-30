@@ -44,8 +44,13 @@ public:
         // Find spectral peaks (local maxima)
         for (int i = 3; i < (bufferSize / 2) - 2; i += 3)
         {
-            if (mags[i] > mags[i - 1] && mags[i] > mags[i - 2] &&
-                mags[i] > mags[i + 1] && mags[i] > mags[i + 2])
+            int g = i - 2;
+            int h = i - 1;
+            int j = i + 1;
+            int k = i + 2;
+
+            if (mags[i] > mags[h] && mags[i] > mags[g] &&
+                mags[i] > mags[j] && mags[i] > mags[k])
                 {
                 peakCount += 1;
                 peaks.push_back (i);
@@ -63,7 +68,7 @@ public:
             {
                 const auto peak = peaks[peakIndex];
                 const auto prevPeak = previousPeaks[previousPeakIndex];
-
+                
                 // Connect current peak to the previous closest peak
                 while (previousPeakIndex < previousPeakCount &&
                       std::abs (peak - previousPeaks[previousPeakIndex + 1]) < std::abs (peak - prevPeak))
@@ -121,8 +126,6 @@ public:
             buffer[i] = mags[x] * cos (psi[x]);
             buffer[i + 1] = mags[x] * sin (psi[x]);
         }
-
-        // TODO conjugate first half of spectrum as per dafx example?
     }
 
 private:
