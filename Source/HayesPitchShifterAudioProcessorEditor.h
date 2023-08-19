@@ -18,10 +18,11 @@ public:
     void buttonClicked(juce::Button* button) override;
 
 private:
+    CustomLookAndFeel customLookAndFeel;
+    
     HayesPitchShifterAudioProcessor& processor;
 
     juce::Image image;
-    CustomLookAndFeel customLookAndFeel;
 
     PresetBar presetBar;
 

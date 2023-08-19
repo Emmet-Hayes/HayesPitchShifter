@@ -6,20 +6,18 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor(Hay
 ,   processor                { p }
 ,   presetBar                { p }
 {
-    presetBar.setLookAndFeel(&customLookAndFeel);
+    setLookAndFeel(&customLookAndFeel);
+    
     addAndMakeVisible(presetBar);
 
-    pitchLabel.setLookAndFeel(&customLookAndFeel);
     pitchLabel.setFont(customLookAndFeel.getPopupMenuFont());
     pitchLabel.setText("Pitch", juce::NotificationType::dontSendNotification);
     addAndMakeVisible(pitchLabel);
 
-    pitchSlider.setLookAndFeel(&customLookAndFeel);
     pitchSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     pitchSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 20);
     addAndMakeVisible(pitchSlider);
 
-    pitchModeButton.setLookAndFeel(&customLookAndFeel);
     pitchModeButton.setButtonText("Intervals");
     pitchModeButton.setToggleable(true);
     pitchModeButton.setToggleState(true, juce::dontSendNotification);
