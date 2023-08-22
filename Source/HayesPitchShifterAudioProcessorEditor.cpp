@@ -14,7 +14,7 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor(Hay
     pitchLabel.setText("Pitch", juce::NotificationType::dontSendNotification);
     addAndMakeVisible(pitchLabel);
 
-    pitchSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    pitchSlider.setSliderStyle(juce::Slider::Rotary);
     pitchSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 20);
     addAndMakeVisible(pitchSlider);
 
