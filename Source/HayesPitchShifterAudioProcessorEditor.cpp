@@ -50,16 +50,18 @@ void HayesPitchShifterAudioProcessorEditor::resized()
 {
     const auto scale = static_cast<float> (getWidth()) / defaultWidth;
 
-    auto setBoundsAndApplyScaling = [&](juce::Component* component, int x, int y, int w, int h)
+    auto setBoundsAndApplyScaling = [&](juce::Component* component, int x, int y, int w, int h, bool isSlider = false)
     {
         component->setBounds(static_cast<int>(x * scale), static_cast<int>(y * scale),
-            static_cast<int>(w * scale), static_cast<int>(h * scale));
+                             static_cast<int>(w * scale), static_cast<int>(h * scale));
+        if (isSlider)
+            dynamic_cast<juce::Slider*>(component)->setTextBoxStyle(juce::Slider::TextBoxBelow, false, static_cast<int>(70 * scale), static_cast<int>(20 * scale));
     };
     
     customLookAndFeel.setWindowScale(scale);
     setBoundsAndApplyScaling(&presetBar, 0, 0, 200, 20);
     setBoundsAndApplyScaling(&pitchLabel, 78, 20, 100, 30);
-    setBoundsAndApplyScaling(&pitchSlider, 57, 40, 80, 80);
+    setBoundsAndApplyScaling(&pitchSlider, 57, 40, 80, 80, true);
     setBoundsAndApplyScaling(&pitchModeButton, 55, 125, 80, 20);
 }
 
