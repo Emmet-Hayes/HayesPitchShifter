@@ -7,7 +7,16 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor(Hay
 ,   presetBar                { p }
 {
     setLookAndFeel(&customLookAndFeel);
-    
+    addAllGUIComponents();
+}
+
+HayesPitchShifterAudioProcessorEditor::~HayesPitchShifterAudioProcessorEditor()
+{
+    pitchModeButton.removeListener(this);
+}
+
+void HayesPitchShifterAudioProcessorEditor::addAllGUIComponents()
+{
     addAndMakeVisible(presetBar);
 
     pitchLabel.setFont(customLookAndFeel.getPopupMenuFont());
@@ -26,19 +35,14 @@ HayesPitchShifterAudioProcessorEditor::HayesPitchShifterAudioProcessorEditor(Hay
 
     image = juce::ImageCache::getFromMemory(BinaryData::bg_file_jpg, BinaryData::bg_file_jpgSize);
 
-    pitchAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(p.apvts, "pitch", pitchSlider);
-    buttonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(p.apvts, "discrete", pitchModeButton);
+    pitchAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(processor.apvts, "pitch", pitchSlider);
+    buttonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(processor.apvts, "discrete", pitchModeButton);
 
     const auto ratio = static_cast<double> (defaultWidth) / defaultHeight;
     setResizable(false, true);
     getConstrainer()->setFixedAspectRatio(ratio);
     getConstrainer()->setSizeLimits(defaultWidth, defaultHeight, defaultWidth * 2, defaultHeight * 2);
     setSize(defaultWidth, defaultHeight);
-}
-
-HayesPitchShifterAudioProcessorEditor::~HayesPitchShifterAudioProcessorEditor()
-{
-    pitchModeButton.removeListener(this);
 }
 
 void HayesPitchShifterAudioProcessorEditor::paint(juce::Graphics& g)
