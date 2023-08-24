@@ -33,8 +33,8 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> pitchAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> buttonAttachment;
     
-    int defaultWidth = 200;
-    int defaultHeight = 150;
+    static constexpr int defaultWidth  { 200 };
+    static constexpr int defaultHeight { 150 };
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HayesPitchShifterAudioProcessorEditor)
 };
