@@ -1,8 +1,11 @@
 #pragma once
 
-#include <JuceHeader.h>
 #include <memory>
 #include <cassert>
+
+#include <JuceHeader.h>
+
+
 
 template<typename ElementType = float>
 struct BlockCircularBuffer final

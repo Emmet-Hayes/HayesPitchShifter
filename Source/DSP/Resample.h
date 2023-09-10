@@ -1,5 +1,6 @@
 #pragma once
 
+
 // Resample a signal to a new size using linear interpolation
 // The 'originalSize' is the max size of the original signal
 // The 'newSignalSize' is the size to resample to. The 'newSignal' must be at least as big as this size.

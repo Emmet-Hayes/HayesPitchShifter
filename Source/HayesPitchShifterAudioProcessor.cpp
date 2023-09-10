@@ -1,6 +1,7 @@
 #include "HayesPitchShifterAudioProcessor.h"
 #include "HayesPitchShifterAudioProcessorEditor.h"
 
+
 HayesPitchShifterAudioProcessor::HayesPitchShifterAudioProcessor() 
 :   BaseAudioProcessor { createParameterLayout() }
 {

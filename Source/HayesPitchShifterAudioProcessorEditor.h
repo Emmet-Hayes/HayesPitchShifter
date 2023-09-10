@@ -1,8 +1,10 @@
 #pragma once
+
 #include "../../Common/BaseAudioProcessorEditor.h"
 #include "../../Common/CustomLookAndFeel.h"
 #include "../../Common/PitchSlider.h"
 #include "../../Common/PresetBar.h"
+
 #include "HayesPitchShifterAudioProcessor.h"
 
 

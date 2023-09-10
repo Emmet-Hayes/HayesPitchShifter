@@ -1,11 +1,13 @@
 #pragma once
 
-#include <juce_dsp/juce_dsp.h>
 #include <algorithm>
 #include <functional>
 
+#include <juce_dsp/juce_dsp.h>
+
 #include "BlockCircularBuffer.h"
 #include "Resample.h"
+
 
 using FloatType = float;
 
